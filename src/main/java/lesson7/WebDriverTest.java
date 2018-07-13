@@ -49,4 +49,25 @@ public class WebDriverTest extends BaseTest {
         assertEquals(featuredPictureText, featuredPictureBlock.findElement(By.id("Today's_featured_picture")).getText(), "Wrong title");
         assertFalse(featuredPictureBlock.findElement(By.xpath("//*[@id=\"mp-tfp\"]/table/tbody/tr/td[1]/a/img")).getAttribute("src").isEmpty(), "A picture missing");
     }
+
+    @Test
+    public void enterInvalidCredentialsExpectedTryAgainMessage() {
+        driver.get("https://www.wikipedia.org/");
+
+        driver.findElement(By.id("js-link-box-en")).click();
+        driver.findElement(By.xpath("//*[@id=\"pt-login\"]/a")).click();
+
+        WebElement inputLogin = driver.findElement(By.id("wpName1"));
+        WebElement inputPassword = driver.findElement(By.id("wpPassword1"));
+
+        inputLogin.sendKeys("123");
+        inputPassword.sendKeys("123");
+        driver.findElement(By.id("wpLoginAttempt")).submit();
+
+        String invalidCredentialsMessage = "Incorrect username or password entered. Please try again.";
+
+        assertEquals(invalidCredentialsMessage,
+                driver.findElement(By.xpath("//*[@id=\"userloginForm\"]/form/div[1]/div/p")).getText(),
+                "Invalid credential message");
+    }
 }
