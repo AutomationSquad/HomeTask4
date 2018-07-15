@@ -12,12 +12,11 @@ public class WebDriverTest extends BaseTest {
     @Test
     public void test(){
         driver.get("https://www.wikipedia.org/");
-        Select drpCountry;
+        Select countryLanguage = new Select(driver.findElement(By.id("searchLanguage")));
         WebElement searchInput = driver.findElement(By.xpath("//*[@id='searchInput']"));
         String searchString = "Ukraine";
         searchInput.sendKeys(searchString);
-        drpCountry = new Select(driver.findElement(By.id("searchLanguage")));
-        drpCountry.selectByVisibleText("English");
+        countryLanguage.selectByVisibleText("English");
         driver.findElement(By.cssSelector("[type='submit']")).click();
         assertEquals(searchString, driver.findElement(By.id("firstHeading")).getText(),"Wrong title");
         assertEquals(searchString, driver.findElement(By.cssSelector("[class='fn org country-name']")).getText(), "Wrong country name");
