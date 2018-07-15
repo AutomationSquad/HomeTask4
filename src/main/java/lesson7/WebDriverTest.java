@@ -1,5 +1,4 @@
 package lesson7;
-
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -20,7 +19,6 @@ public class WebDriverTest extends BaseTest {
         driver.findElement(By.cssSelector("[type='submit']")).click();
         assertEquals(searchString, driver.findElement(By.id("firstHeading")).getText(),"Wrong title");
         assertEquals(searchString, driver.findElement(By.cssSelector("[class='fn org country-name']")).getText(), "Wrong country name");
-
     }
     @Test
     public void test2(){
@@ -38,7 +36,6 @@ public class WebDriverTest extends BaseTest {
         driver.findElement(By.id("wpName1")).sendKeys("admin");
         driver.findElement(By.id("wpPassword1")).sendKeys("admin");
         driver.findElement(By.id("wpLoginAttempt")).click();
-        assertEquals("Incorrect username or password entered. Please try again.",driver.findElement(By.cssSelector("[class = 'mw-parser-output']")).getText(),
-        "Invalid message");
+        assertEquals("Incorrect username or password entered. Please try again.",driver.findElement(By.cssSelector("[class = 'mw-parser-output']")).getText(),"Invalid message");
     }
 }
