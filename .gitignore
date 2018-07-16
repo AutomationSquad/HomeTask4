@@ -1,0 +1,9 @@
+out
+.idea
+.idea/workspace.xml
+.logs
+*.iml
+build
+.gradle
+gradle
+gradlew*
