@@ -24,7 +24,7 @@ class WebDriverTest extends BaseTest {
         searchInput.sendKeys(searchString);
         driver.findElement(By.cssSelector("[type='submit']")).click();
         assertEquals(searchString, driver.findElement(By.id("firstHeading")).getText(), "Wrong title");
-        assertEquals(searchString, driver.findElement(By.cssSelector("[class='fn org country-name']")).getText(), "Wrong country name");
+        assertEquals(searchString, driver.findElement(By.cssSelector(".country-name")).getText(), "Wrong country name");
 
 
     }
