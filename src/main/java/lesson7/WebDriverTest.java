@@ -12,6 +12,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class WebDriverTest extends BaseTest {
 
@@ -34,7 +35,7 @@ public class WebDriverTest extends BaseTest {
         assertEquals(searchString, driver.findElement(By.id("firstHeading")).getText(),
                 "Wrong title");
 
-        assertEquals(searchString, driver.findElement(By.xpath("//*[@id=\"mw-content-text\"]/div/table[1]/tbody/tr[1]/th/span")).getText(), "Wrong title");
+        assertEquals(searchString, driver.findElement(By.cssSelector(".country-name")).getText(), "Wrong title");
     }
 
     @Test
@@ -47,7 +48,10 @@ public class WebDriverTest extends BaseTest {
         WebElement featuredPictureBlock = driver.findElement(By.id("mp-bottom"));
 
         assertEquals(featuredPictureText, featuredPictureBlock.findElement(By.id("Today's_featured_picture")).getText(), "Wrong title");
-        assertFalse(featuredPictureBlock.findElement(By.xpath("//*[@id=\"mp-tfp\"]/table/tbody/tr/td[1]/a/img")).getAttribute("src").isEmpty(), "A picture missing");
+
+        WebElement picture = featuredPictureBlock.findElement(By.xpath("//*[@id=\"mp-tfp\"]//*[@class=\"image\"]/img"));
+        assertFalse(picture.getAttribute("src").isEmpty(), "A picture missing");
+        assertTrue(picture.isDisplayed());
     }
 
     @Test
@@ -67,7 +71,7 @@ public class WebDriverTest extends BaseTest {
         String invalidCredentialsMessage = "Incorrect username or password entered. Please try again.";
 
         assertEquals(invalidCredentialsMessage,
-                driver.findElement(By.xpath("//*[@id=\"userloginForm\"]/form/div[1]/div/p")).getText(),
+                driver.findElement(By.cssSelector(".error > .mw-parser-output > p")).getText(),
                 "Invalid credential message");
     }
 }
